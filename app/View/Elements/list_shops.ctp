@@ -1,0 +1,203 @@
+<?php
+$this->Paginator->options(
+        array('update' => '.box',
+            'evalScripts' => true,
+            'before' => $this->Js->get('#loading')->effect('fadeIn', array('buffer' => false)),
+            'complete' => $this->Js->get('#loading')->effect('fadeOut', array('buffer' => false)),
+            'url' => array('controller' => 'shops',
+                'action' => 'listShop', 'admin' => true, 'text' => (!empty($text)) ? $text : '',),
+));
+?> 
+<table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list footable-loaded footable" data-page-size="10">
+    <thead>
+        <tr>
+            <th>Sr.No</th>
+            <th>Shopname (English)</th>
+            <th>Shopname (Arabic)</th>
+            <th>Shopname (Kurdish)</th>
+            <th>Shop Provider</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        if ($shops):
+             $page = $this->request->params['paging']['Shop']['page'];/*page number exe. page no.2 */
+        $record_limit = $this->request->params['paging']['Shop']['limit'];/* limit 10*/
+            $count = (($page-1)*$record_limit)+1;
+            foreach ($shops as $shop):
+                
+                ?>
+                <tr>
+                    <td><?php echo $count; ?></td>
+                    <td><?=
+                    $this->Html->link('' . __($shop['Shop']['name_en']) . '', array(
+                    'controller' => 'shops',
+                    'action' => 'viewShop',
+                    $shop['Shop']['id'],
+                        // !empty($this->request->params['action']) ? $this->request->params['action'] : ''
+                    ), array('escape' => false)); ?></td>
+                    <td><?=
+                    $this->Html->link('' . __($shop['Shop']['name_ar']) . '', array(
+                    'controller' => 'shops',
+                    'action' => 'viewShop',
+                    $shop['Shop']['id'],
+                        // !empty($this->request->params['action']) ? $this->request->params['action'] : ''
+                    ), array('escape' => false)); ?></td>
+                    <td><?=
+                    $this->Html->link('' . __($shop['Shop']['name_ku']) . '', array(
+                    'controller' => 'shops',
+                    'action' => 'viewShop',
+                    $shop['Shop']['id'],
+                        // !empty($this->request->params['action']) ? $this->request->params['action'] : ''
+                    ), array('escape' => false)); ?></td>
+                     <td><?= $shop['User']['name'] ?></td>
+
+                    <td style="width:150px;">
+                      <?php 
+                    // echo
+                    // $this->Html->link('' . __($shop['Shop']['name_en']) . '', array(
+                    // 'controller' => 'shops',
+                    // 'action' => 'viewShop',
+                    // $shop['Shop']['id'],
+                    // ), array('escape' => false));
+                     ?>
+
+
+
+
+
+
+        <?php
+
+        // echo
+        // $this->Html->link(
+        //      "<button type='button' data-toggle='tooltip' title='Edit' class='cstm-des-rounded-sec btn btn-info'><i class='edit fa fa-pencil-square-o' aria-hidden='true'></i></button>", array(
+        //     'controller' => 'shops',
+        //     'action' => 'editShop',
+        //     'page' => !empty($this->passedArgs['page']) ? $this->passedArgs['page'] : '1',
+        //     $shop['Shop']['id'], 'listShop',
+        //         ), array('escape' => false)
+        // );
+        ?>             
+
+
+                        <button type="button" title="Delete" 
+                                title='Delete' 
+                                alt='alert'
+                                class=" cstm-des-rounded-sec btn btn-danger  delete_cat model_img" 
+                                u_id ="<?= $shop['Shop']['id'] ?>" 
+                                name="button">
+                            <i class="fa fa-times" aria-hidden="true">
+                                </i>
+                        </button>
+ </td></tr>
+<?php
+$count++;
+endforeach;
+else :
+echo "<tr><td colspan='5' style='text-align: center;'>No data found.</td></tr>";
+endif;
+?>
+
+    </tbody>
+
+<tfoot>
+<tr>
+<td colspan="6">
+<div class="text-right">
+<?php if ($this->Paginator->numbers()): ?>
+<ul class="pagination">
+<?php
+echo $this->Paginator->prev(__('<<'), array('tag' => 'li','class' => 'footable-page-arrow'), null, array('tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a'));
+echo $this->Paginator->numbers(array('separator' => '', 'currentTag' => 'a', 'currentClass' => 'active', 'tag' => 'li', 'first' => 1));
+echo $this->Paginator->next(__('>>'), array('tag' => 'li', 'currentClass' => 'disabled','class' => 'footable-page-arrow'), null, array('tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a'));
+?>
+
+</ul>
+<?php endif; ?>
+
+
+</div>
+</td>
+</tr>
+</tfoot>
+    
+</table>
+
+
+<script>
+    $('.delete_cat').click(function () {
+       
+       var text = $('.myInput').val();
+        //$(".showSweetAlert").find('p').text("lead text-muted");
+        //var table = $(this).attr("msg");
+        var id = $(this).attr('u_id');
+        swal({
+            title: "Are you sure?",
+            text: "You want to delete this shop !",
+            type: "warning",
+            timer: 3000,
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel !",
+
+            closeOnConfirm: true,
+            closeOnCancel: true,
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $("#loading").fadeIn("slow");
+                $.ajax({
+                    type: "POST",
+                    url: root + 'admin/shops/deleteShop/text:'+ text 
+                        + '/page:<?= !empty($this->passedArgs['page']) ? $this->passedArgs['page'] : '1' ?>' 
+                        + '/shop:<?= !empty($this->passedArgs['sort']) ? $this->passedArgs['sort'] : 'Shop.id' ?>' 
+                        + '/direction:<?= !empty($this->passedArgs['direction']) ? $this->passedArgs['direction'] : 'DESC' ?>',
+                    data: {
+                        id: id
+                    },
+                    success: function (data) {
+                        $("#loading").fadeOut("slow");
+                        $('#allDataUpdate').html(data);
+                       // swal("Done!", "It was succesfully deleted!", "success");
+                      
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        swal("Error deleting!", "Please try again", "error");
+                    }
+//                complete: function (e, t, settings) {
+//                    if (e.status === 400 || t === 'timeout') {
+//                        //	form_result.html(alertError('Timeout, please try again after sometime.'));
+//                    }
+//                }
+                });
+            } 
+            else
+            {
+            
+                swal();
+            }
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $(".img_display").click(function () {
+
+            var img_display = $(this).attr("src");
+            var title = $(this).attr("data-title");
+            $("#model_img").attr("src", img_display);
+            //$("#modal_title").html("image");
+            $("#img_display").modal("show");
+        }
+        );
+    }
+    );
+
+
+
+</script>

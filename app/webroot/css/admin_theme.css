@@ -1,0 +1,84 @@
+/*login page starts*/
+
+.admin_login_page_theme .login-box-body{
+	background: rgba(255,255,255,0.3);
+	border-radius: 0px !important;
+	-moz-border-radius: 0px !important;
+	-webkit-border-radius: 0px !important;
+}
+.admin_login_page_theme .login-box-msg{
+	font-size: 24px;
+	line-height: 30px;
+	text-align: left;
+	color: #fff;
+	font-weight: 300;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.admin_login_page_theme .login-form .form-group span{
+	color: #ccc;
+}
+.admin_login_page_theme .form-actions{
+	text-align: right;
+}
+.admin_login_page_theme .form-actions .btn-primary{
+	border-color: #00a65a !important;
+	border-radius: 0px !important;
+	-moz-border-radius: 0px !important;
+	-webkit-border-radius: 0px !important;
+	background-color: #00a65a !important;
+}
+.admin_login_page_theme .form-actions .btn-primary span{
+	margin-left: 5px;
+	vertical-align: top;
+	line-height: 1.42857143;
+}
+.admin_login_page_theme .login-box{
+	margin-bottom: 5%;
+	margin-top: 5%;
+}
+/*login page ends*/
+/*dashboard page starts*/
+.admin_new_theme.skin-blue .main-header .navbar{
+	background-color: #00a65a !important;
+}
+.admin_new_theme.skin-blue .main-header .logo{
+	background-color: #00a65a !important;
+}
+.admin_new_theme.skin-blue .main-sidebar{
+	background-color: #000;
+}
+.admin_new_theme.skin-blue .sidebar-menu > li > .treeview-menu{
+	background: #1c1818;
+}
+.admin_new_theme.skin-blue .btn-primary {
+    background-color: #00a65a !important;
+    border-color: #fff !important;
+}
+.admin_new_theme.skin-blue .sidebar-menu>li:hover>a,.admin_new_theme.skin-blue .sidebar-menu>li.active>a {
+	background:#1c1818;
+	border-left-color:#42c16d;
+}
+.cstm-des-rounded-sec{
+	padding: 1px 10px !important;
+	font-size: 12px !important;
+	line-height: 16px !important;
+	border: none !important;
+	border-radius: 20px !important;
+	font-weight: bold !important;
+}
+.admin_new_theme.skin-blue .table a {
+    color: #42c16d !important;
+}
+.admin_new_theme.skin-blue .pagination > .active > a, .admin_new_theme.skin-blue .pagination > .active > a:focus, .admin_new_theme.skin-blue .pagination > .active > a:hover, .admin_new_theme.skin-blue .pagination > .active > span, .admin_new_theme.skin-blue .pagination > .active > span:focus, .admin_new_theme.skin-blue .pagination > .active > span:hover {
+    background-color: #42c16d !important;
+	border-color: #42c16d !important;
+}
+.admin_new_theme.skin-blue .main-header .navbar .sidebar-toggle:hover {
+ background-color:#008000;
+}
+.admin_new_theme.skin-blue .box.box-primary {
+    border-top-color: #42c16d;
+	padding: 10px;
+}
+/*dashboard page ends*/
